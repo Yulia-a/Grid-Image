@@ -25,25 +25,18 @@ class GridImage extends Component {
   }
 
   componentDidMount() {
-    const grid = this.gridList;
-    const initMasonry = () => (
-      this.msnry = new Masonry(grid, {
+    const initMasonry = () => {
+      this.msnry = new Masonry('.grid-list', {
         itemSelector: '.grid-item',
         gutter: 10,
         columnWidth: 300,
         isFitWidth: true
-      })
-    );
-    initMasonry();
+      });
+    };
+    setTimeout(initMasonry, 1000);
 
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.list.length !== prevProps.list.length) {
-      this.msnry.reloadItems();
-      this.msnry.layout();
-    }
-  }
 
   handleListener() {
     document.addEventListener("keydown", this.handleKeydown);
@@ -157,7 +150,7 @@ class GridImage extends Component {
     const { list } = this.props;
     return (
       <div className="grid-wrapper">
-        <div className="grid-list" ref={(grid) => (this.gridList= grid)}>
+        <div className="grid-list" ref={(grid) => (this.gridList = grid)}>
           {
             list.map((item, index) => {
               return (
