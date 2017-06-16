@@ -14,7 +14,6 @@ class GridImage extends Component {
       initPoint: 0,
       finalPoint: 0
     };
-
     this.handleClick = this.handleClick.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
     this.handleWheel = this.handleWheel.bind(this);
@@ -22,21 +21,19 @@ class GridImage extends Component {
     this.handleSwipeEnd = this.handleSwipeEnd.bind(this);
     this.handleListener = this.handleListener.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleOnLoaded = this.handleOnLoaded.bind(this);
   }
 
-  componentDidMount() {
-    const initMasonry = () => {
-      this.msnry = new Masonry('.grid-list', {
-        itemSelector: '.grid-item',
-        gutter: 10,
-        columnWidth: 300,
-        isFitWidth: true
-      });
-    };
-    setTimeout(initMasonry, 1000);
-
+  handleOnLoaded(){
+    this.msnry = new Masonry('.grid-list', {
+      itemSelector: '.grid-item',
+      gutter: 10,
+      columnWidth: 300,
+      isFitWidth: true
+    });
+    this.msnry.reloadItems();
+    this.msnry.layout();
   }
-
 
   handleListener() {
     document.addEventListener("keydown", this.handleKeydown);
@@ -158,6 +155,7 @@ class GridImage extends Component {
                   key={index}
                   src={item.src}
                   id={index}
+                  onLoad={this.handleOnLoaded}
                   onClickItem={this.handleClick}
                 >
                 </GridItem>
