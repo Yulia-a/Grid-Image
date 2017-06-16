@@ -34,6 +34,11 @@ body {
   user-select: none;
   width: 400px;
 }
+@media screen and (max-width: 500px){
+  .lightbox-wrapper img {
+    width: auto;
+  }
+}
 .lightbox-nav {
   height: 57px;
   width: 100%;
